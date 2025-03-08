@@ -20,33 +20,35 @@ export function EditMode(): React.JSX.Element {
     return (
         <div>
             <h3>Edit Mode</h3>
+
             <Form.Check
-                type="switch"
+                className="form-switch"
+                type="checkbox"
                 id="to-edit-mode"
                 label="Edit Mode"
                 checked={editMode}
                 onChange={updateEditMode}
             />
-            <Form.Check
-                type="checkbox"
-                id="student-check-is"
-                label="Is a Student"
-                name="student"
-                value="is a student"
-                checked={isStudent}
-                onChange={updateIsStudent}
-                disabled={!editMode}
-            />
-            <Form.Group controlId="formUserName">
-                <Form.Label>Name:</Form.Label>
-                <Form.Control
-                    value={name}
-                    onChange={updateName}
-                    disabled={!editMode}
+            {/*{edit &&()} from ChatGPT*/}
+            {editMode && (
+                <Form.Check
+                    type="checkbox"
+                    id="student-check-is"
+                    label="Is a Student"
+                    name="student"
+                    value="is a student"
+                    checked={isStudent}
+                    onChange={updateIsStudent}
                 />
-            </Form.Group>
+            )}
+            {editMode && (
+                <Form.Group controlId="formUserName">
+                    <Form.Label>Name:</Form.Label>
+                    <Form.Control value={name} onChange={updateName} />
+                </Form.Group>
+            )}
             <div>
-                {name} is {isStudent ? "a student" : "not a student"}{" "}
+                {name} is {isStudent ? "a student" : "not a student"}
             </div>
         </div>
     );
